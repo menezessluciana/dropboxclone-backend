@@ -20,7 +20,9 @@ const File = new mongoose.Schema(
 
 //campo virtual = campo que nao existe na tabela, mas existe no backend
 File.virtual('url').get(function(){
-  return `http://localhost:333/files/${encodeURIComponent(this.path)}`
+
+  const url = process.env.URL  || 'http://localhost:333'
+  return `${url}/files/${encodeURIComponent(this.path)}`
 })
 
 module.exports = mongoose.model('File', File);

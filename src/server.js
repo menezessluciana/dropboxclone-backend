@@ -5,8 +5,10 @@ const cors = require('cors');
 
 
 const app = express();
+//TODO MUNDO CONSEGUE ACESSAR A APLICAÇÃO
 
 app.use(cors());
+
 //real time
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -38,7 +40,10 @@ app.use(express.urlencoded({ extended: true}));
 
 //usa rotas de Routes.js
 app.use(require('./routes'));
+
 //todas vez que acessar a pasta file, irá acessar a pasta tmps
 app.use('/files', express.static(path.resolve(__dirname, '..','tmps')));
 
-server.listen(333);
+server.listen(process.env.PORT || 333);
+
+//VARIAVEIS AMBIENTES = proccess.env.PORT
